@@ -6,7 +6,7 @@ export const IntroContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: 5.7rem;
+  margin: 5.7rem 0;
 `
 
 export const IntroTextContainer = styled.div`
