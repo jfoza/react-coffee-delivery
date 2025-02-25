@@ -10,7 +10,6 @@ export const IntroContainer = styled.div`
 `
 
 export const IntroTextContainer = styled.div`
-  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,7 +34,6 @@ export const IntroTextContainer = styled.div`
 `
 
 export const IntroImgContainer = styled.div`
-  width: 50%;
   display: flex;
   justify-content: end;
 
@@ -46,6 +44,12 @@ export const IntroImgContainer = styled.div`
       width: 100%;
       height: auto;
       object-fit: contain;
+    }
+  }
+
+  @media (max-width: 992px) {
+    div {
+      max-width: 80%;
     }
   }
 

@@ -1,9 +1,19 @@
 import { Grid, HomeContainer, Title } from './styles.ts'
+import { useContext } from 'react'
+import { OrdersContext } from '../../contexts/OrdersContext.tsx'
 import { Intro } from '../../components/Intro/Index.tsx'
-import { coffees } from '../../data'
-import { Coffee } from '../../components/Coffee/Index.tsx'
+import { CoffeeCard } from './CoffeeCard/Index.tsx'
 
 export function Home() {
+  const { products, updateItemQuantity } = useContext(OrdersContext)
+
+  const handleQuantityChange = (id: string, delta: number) => {
+    const coffee = products.find((coffee) => coffee.id === id)
+    if (coffee) {
+      updateItemQuantity(coffee, delta)
+    }
+  }
+
   return (
     <HomeContainer>
       <Intro />
@@ -12,8 +22,12 @@ export function Home() {
         <Title>Nossos cafés</Title>
 
         <Grid>
-          {coffees.map((coffee) => (
-            <Coffee key={coffee.id} info={coffee} />
+          {products.map((coffee) => (
+            <CoffeeCard
+              key={coffee.id}
+              info={coffee}
+              onQuantityChange={handleQuantityChange}
+            />
           ))}
         </Grid>
       </main>

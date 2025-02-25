@@ -5,7 +5,7 @@ export const FlagContainer = styled.div`
   display: flex;
   gap: 0.5rem;
 
-  span {
+  div {
     display: flex;
     align-items: center;
 
@@ -25,7 +25,10 @@ export const Rounded = styled.div<{ $backgroundColor: TBackgroundColor }>`
   align-items: center;
   justify-content: center;
 
+  svg {
+    color: ${({ theme }) => theme.white};
+  }
+
   border-radius: 50%;
-  color: ${({ theme }) => theme.white};
   background: ${({ $backgroundColor, theme }) => theme[$backgroundColor]};
 `

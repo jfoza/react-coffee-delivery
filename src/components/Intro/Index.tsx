@@ -23,30 +23,23 @@ export function Intro() {
 
         <IntroImgTextBottom>
           <section>
-            <Flag
-              icon={<ShoppingCart />}
-              text="Compra simples e segura"
-              backgroundColor="yellow-dark"
-            />
-            <Flag
-              icon={<Timer />}
-              text="Entrega rápida e rastreada"
-              backgroundColor="yellow"
-            />
+            <Flag icon={<ShoppingCart />} backgroundColor="yellow-dark">
+              Compra simples e segura
+            </Flag>
+
+            <Flag icon={<Timer />} backgroundColor="yellow">
+              Entrega rápida e rastreada
+            </Flag>
           </section>
 
           <section>
-            <Flag
-              icon={<Package />}
-              text="Embalagem mantém o café intacto"
-              backgroundColor="base-text"
-            />
+            <Flag icon={<Package />} backgroundColor="base-text">
+              Embalagem mantém o café intacto
+            </Flag>
 
-            <Flag
-              icon={<Coffee />}
-              text="O café chega fresquinho até você"
-              backgroundColor="purple"
-            />
+            <Flag icon={<Coffee />} backgroundColor="purple">
+              O café chega fresquinho até você
+            </Flag>
           </section>
         </IntroImgTextBottom>
       </IntroTextContainer>

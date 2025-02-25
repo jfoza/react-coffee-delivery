@@ -2,41 +2,37 @@ import {
   Card,
   CartIcon,
   CartQuantity,
-  CounterButton,
-  CounterContainer,
   Description,
   Footer,
   Image,
   MonetarySymbol,
-  Quantity,
   Tag,
   TagsContainer,
   Title,
   Value,
 } from './styles.ts'
-import { ICoffee } from '../../data'
 import { FaShoppingCart } from 'react-icons/fa'
-import { Minus, Plus } from 'phosphor-react'
+import { Counter } from '../../../components/Counter/Index.tsx'
+import { ICoffee } from '../../../reducers/orders/reducer.ts'
 
-interface ICoffeeProps {
+export function CoffeeCard({
+  info,
+  onQuantityChange,
+}: Readonly<{
   info: ICoffee
-}
-
-export function Coffee({ info }: Readonly<ICoffeeProps>) {
+  onQuantityChange: (id: string, delta: number) => void
+}>) {
   const baseUrl = window.location.origin
-  const tags = info.tags
-
   return (
     <Card>
       <Image src={`${baseUrl}/coffee/${info.image}`} alt={info.image} />
 
       <div>
         <TagsContainer>
-          {tags?.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+          {info.tags?.map((tag) => <Tag key={tag}>{tag}</Tag>)}
         </TagsContainer>
 
         <Title>{info.name}</Title>
-
         <Description>{info.description}</Description>
       </div>
 
@@ -52,17 +48,12 @@ export function Coffee({ info }: Readonly<ICoffeeProps>) {
         </div>
 
         <CartQuantity>
-          <CounterContainer>
-            <CounterButton>
-              <Minus size={14} />
-            </CounterButton>
-
-            <Quantity>{1}</Quantity>
-
-            <CounterButton>
-              <Plus size={14} />
-            </CounterButton>
-          </CounterContainer>
+          <Counter
+            id={info.id}
+            quantity={info.selectQuantity}
+            onQuantityChange={onQuantityChange}
+            width="72px"
+          />
 
           <CartIcon>
             <FaShoppingCart size={18} />

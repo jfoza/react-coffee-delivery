@@ -89,48 +89,6 @@ export const CartQuantity = styled.div`
   justify-content: space-between;
 `
 
-export const CounterContainer = styled.div`
-  width: 72px;
-  height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: ${({ theme }) => theme['base-button']};
-  border-radius: 6px;
-`
-
-export const CounterButton = styled.button`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-
-  background: transparent;
-  color: ${({ theme }) => theme.purple};
-  border: none;
-  cursor: pointer;
-  transition: color 0.2s;
-
-  &:hover {
-    background: transparent;
-    color: ${({ theme }) => theme['purple-dark']};
-  }
-
-  &:focus {
-    outline: 0;
-    box-shadow: none;
-  }
-`
-
-export const Quantity = styled.div`
-  flex: 1;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  color: ${({ theme }) => theme['base-title']};
-`
-
 export const CartIcon = styled.div`
   width: 38px;
   height: 38px;

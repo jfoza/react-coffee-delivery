@@ -1,28 +1,12 @@
 import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
+  width: 100%;
   height: 104px;
-  padding: 0 10rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-
-  @media (max-width: 1200px) {
-    padding: 0 5rem;
-  }
-
-  @media (max-width: 992px) {
-    padding: 0 4rem;
-  }
-
-  @media (max-width: 768px) {
-    padding: 0 3rem;
-  }
-
-  @media (max-width: 576px) {
-    padding: 0 2rem;
-  }
 `
 
 export const HeaderLogo = styled.img`
@@ -33,7 +17,6 @@ export const HeaderLogo = styled.img`
 export const CartWithLocation = styled.div`
   width: max-content;
   height: max-content;
-
   display: flex;
   justify-content: space-between;
   gap: 0.75rem;
@@ -45,7 +28,6 @@ export const BadgeLocationIcon = styled.span`
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem;
-
   background: ${({ theme }) => theme['purple-light']};
   color: ${({ theme }) => theme['purple-dark']};
   border-radius: 6px;
@@ -65,11 +47,27 @@ export const BadgeCartIcon = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: ${({ theme }) => theme['yellow-light']};
   border-radius: 6px;
+  position: relative; /* Necessário para posicionar o badge */
 
   svg {
     color: ${({ theme }) => theme['yellow-dark']};
   }
+`
+
+export const CartItemCount = styled.span`
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  background: ${({ theme }) => theme['yellow-dark']};
+  color: ${({ theme }) => theme.white};
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
 `

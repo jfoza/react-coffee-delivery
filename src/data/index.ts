@@ -1,14 +1,5 @@
 import { v4 as uuid4 } from 'uuid'
-
-export interface ICoffee {
-  id: string
-  name: string
-  description: string
-  value: number
-  selectQuantity: number
-  image: string
-  tags?: string[]
-}
+import { ICoffee } from '../reducers/orders/reducer.ts'
 
 export const coffees: ICoffee[] = [
   // 1
@@ -147,5 +138,53 @@ export const coffees: ICoffee[] = [
     selectQuantity: 0,
     image: 'irlandes.svg',
     tags: ['ESPECIAL', 'ALCOÓLICO'],
+  },
+]
+
+export const selectedCoffees: ICoffee[] = [
+  {
+    id: uuid4(),
+    name: 'Expresso Tradicional',
+    description: 'O tradicional café feito com água quente e grãos moídos',
+    value: 9.9,
+    selectQuantity: 0,
+    image: 'expresso-tradicional.svg',
+    tags: ['TRADICIONAL'],
+  },
+  {
+    id: uuid4(),
+    name: 'Expresso Americano',
+    description: 'Expresso diluído, menos intenso que o tradicional',
+    value: 9.9,
+    selectQuantity: 0,
+    image: 'expresso-americano.svg',
+    tags: ['TRADICIONAL'],
+  },
+  {
+    id: uuid4(),
+    name: 'Expresso Cremoso',
+    description: 'Café expresso tradicional com espuma cremosa',
+    value: 9.9,
+    selectQuantity: 0,
+    image: 'expresso-cremoso.svg',
+    tags: ['TRADICIONAL'],
+  },
+  {
+    id: uuid4(),
+    name: 'Expresso Gelado',
+    description: 'Bebida preparada com café expresso e cubos de gelo',
+    value: 9.9,
+    selectQuantity: 0,
+    image: 'expresso-gelado.svg',
+    tags: ['TRADICIONAL', 'GELADO'],
+  },
+  {
+    id: uuid4(),
+    name: 'Café com Leite',
+    description: 'Meio a meio de expresso tradicional com leite vaporizado',
+    value: 9.9,
+    selectQuantity: 0,
+    image: 'cafe-com-leite.svg',
+    tags: ['TRADICIONAL', 'COM LEITE'],
   },
 ]

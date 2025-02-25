@@ -3,15 +3,15 @@ import { ReactNode } from 'react'
 
 interface FlagProps {
   icon: ReactNode
-  text: string
+  children: ReactNode
   backgroundColor: TBackgroundColor
 }
 
-export function Flag({ icon, text, backgroundColor }: Readonly<FlagProps>) {
+export function Flag({ icon, backgroundColor, children }: Readonly<FlagProps>) {
   return (
     <FlagContainer>
       <Rounded $backgroundColor={backgroundColor}>{icon}</Rounded>
-      <span>{text}</span>
+      <div>{children}</div>
     </FlagContainer>
   )
 }
