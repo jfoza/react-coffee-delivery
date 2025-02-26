@@ -47,7 +47,9 @@ export const ChosenPaymentMethodButton = styled.button`
   gap: 0.7rem;
   cursor: pointer;
   background: ${({ theme }) => theme['base-button']};
-  transition: 0.3s background-color;
+  transition:
+    0.3s background-color,
+    0.3s border-color;
 
   span {
     font-size: 0.875rem;
@@ -63,13 +65,12 @@ export const ChosenPaymentMethodButton = styled.button`
     background: ${({ theme }) => theme['base-hover']};
   }
 
-  &:focus {
+  &.active {
     background: ${({ theme }) => theme['purple-light']};
     border: 1px solid ${({ theme }) => theme['purple-dark']};
   }
+`
 
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
+export const Small = styled.small`
+  color: ${({ theme }) => theme.danger};
 `

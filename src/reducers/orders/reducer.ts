@@ -27,6 +27,7 @@ interface OrdersState {
   address: IAddress
   totalAmount: number
   deliveryCharge: number
+  paymentMethod: string
 }
 
 export function OrdersReducer(state: OrdersState, action: any): OrdersState {
@@ -39,11 +40,18 @@ export function OrdersReducer(state: OrdersState, action: any): OrdersState {
 
     case ActionType.REMOVE_ITEM_TO_CART: {
       return produce(state, (draft) => {
-        const index = draft.cartItems.findIndex(
+        const productCartIndex = draft.cartItems.findIndex(
           (item) => item.id === action.payload.item.id,
         )
-        if (index !== -1) {
-          draft.cartItems.splice(index, 1)
+        if (productCartIndex !== -1) {
+          draft.cartItems.splice(productCartIndex, 1)
+        }
+
+        const productIndex = draft.products.findIndex(
+          (item) => item.id === action.payload.item.id,
+        )
+        if (productIndex !== -1) {
+          draft.products[productIndex].selectQuantity = 0
         }
       })
     }
@@ -75,6 +83,13 @@ export function OrdersReducer(state: OrdersState, action: any): OrdersState {
         }
       })
     }
+
+    case ActionType.SET_PAYMENT_METHOD: {
+      return produce(state, (draft) => {
+        draft.paymentMethod = action.payload.method
+      })
+    }
+
     default:
       return state
   }

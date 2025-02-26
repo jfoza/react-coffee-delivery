@@ -20,5 +20,7 @@ export const defaultTheme = {
   'base-input': '#EDEDED',
   'base-card': '#F3F2F2',
 
+  danger: '#d32f2f',
+
   'app-width': '1440px',
 }

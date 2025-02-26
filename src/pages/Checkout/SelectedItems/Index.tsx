@@ -15,19 +15,31 @@ import {
 } from './styles.ts'
 import { Counter } from '../../../components/Counter/Index.tsx'
 import { Trash } from 'phosphor-react'
-import { NavLink } from 'react-router-dom'
 import { useContext } from 'react'
 import { OrdersContext } from '../../../contexts/OrdersContext.tsx'
+import { ICoffee } from '../../../reducers/orders/reducer.ts'
 
 export function SelectedItems() {
   const baseUrl = window.location.origin
 
-  const { cartItems, updateItemQuantity } = useContext(OrdersContext)
+  const {
+    cartItems,
+    totalAmount,
+    deliveryCharge,
+    updateItemQuantity,
+    removeItemToCart,
+  } = useContext(OrdersContext)
 
   const handleQuantityChange = (id: string, delta: number) => {
     const coffee = cartItems.find((coffee) => coffee.id === id)
     if (coffee) {
       updateItemQuantity(coffee, delta)
+    }
+  }
+
+  const handleRemoveItemToCart = (coffee: ICoffee) => {
+    if (coffee) {
+      removeItemToCart(coffee)
     }
   }
 
@@ -52,7 +64,9 @@ export function SelectedItems() {
                       quantity={coffee.selectQuantity}
                       onQuantityChange={handleQuantityChange}
                     />
-                    <ButtonRemove>
+                    <ButtonRemove
+                      onClick={() => handleRemoveItemToCart(coffee)}
+                    >
                       <Trash size={16} /> <span>REMOVER</span>
                     </ButtonRemove>
                   </div>
@@ -64,8 +78,8 @@ export function SelectedItems() {
                   <p>R$</p>
                   <p>
                     {coffee.value.toLocaleString('pt-BR', {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
+                      style: 'currency',
+                      currency: 'BRL',
                     })}
                   </p>
                 </Price>
@@ -84,16 +98,29 @@ export function SelectedItems() {
         </div>
 
         <div>
-          <p>R$ 29,70</p>
-          <p>R$ 3,50</p>
+          <p>
+            {totalAmount.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          </p>
+          <p>
+            {deliveryCharge.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          </p>
 
-          <h2>R$ 33,20</h2>
+          <h2>
+            {(totalAmount + deliveryCharge).toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          </h2>
         </div>
       </OrderSummary>
 
-      <NavLink to="/order-success">
-        <ConfirmButton>CONFIRMAR PEDIDO</ConfirmButton>
-      </NavLink>
+      <ConfirmButton type="submit">CONFIRMAR PEDIDO</ConfirmButton>
     </SelectedItemsCard>
   )
 }

@@ -10,6 +10,7 @@ import { IAddress, ICoffee, OrdersReducer } from '../reducers/orders/reducer.ts'
 import {
   addItemToCartAction,
   removeItemToCartAction,
+  setPaymentMethodAction,
   updateItemQuantityAction,
 } from '../reducers/orders/actions.ts'
 import { v4 as uuid4 } from 'uuid'
@@ -20,9 +21,11 @@ interface OrdersContextType {
   address: IAddress
   totalAmount: number
   deliveryCharge: number
+  paymentMethod: string
   addItemToCart: (item: ICoffee) => void
   removeItemToCart: (item: ICoffee) => void
   updateItemQuantity: (item: ICoffee, delta: number) => void
+  setPaymentMethod: (method: string) => void
 }
 
 interface OrdersContextProviderProps {
@@ -202,6 +205,14 @@ export function OrdersContextProvider({
         return JSON.parse(productsStoredStateAsJSON)
       }
 
+      const storedPaymentMethodAsJSON = localStorage.getItem(
+        '@coffee-delivery:payment-method',
+      )
+
+      if (storedPaymentMethodAsJSON) {
+        return JSON.parse(storedPaymentMethodAsJSON)
+      }
+
       return initialState
     },
   )
@@ -237,8 +248,25 @@ export function OrdersContextProvider({
     [dispatch],
   )
 
-  const { products, cartItems, address, totalAmount, deliveryCharge } =
+  const { products, cartItems, address, deliveryCharge, paymentMethod } =
     ordersState
+
+  const totalAmount = useMemo(() => {
+    return cartItems.length > 0
+      ? cartItems.reduce(
+          (sum, item) => sum + item.value * item.selectQuantity,
+          0,
+        )
+      : 0
+  }, [cartItems])
+
+  const setPaymentMethod = useCallback(
+    (method: string) => {
+      dispatch(setPaymentMethodAction(method))
+      localStorage.setItem('@coffee-delivery:payment-method', method)
+    },
+    [dispatch],
+  )
 
   const contextValue = useMemo(
     () => ({
@@ -247,9 +275,11 @@ export function OrdersContextProvider({
       address,
       totalAmount,
       deliveryCharge,
+      paymentMethod,
       addItemToCart,
       removeItemToCart,
       updateItemQuantity,
+      setPaymentMethod,
     }),
     [
       products,
@@ -257,9 +287,11 @@ export function OrdersContextProvider({
       address,
       totalAmount,
       deliveryCharge,
+      paymentMethod,
       addItemToCart,
       removeItemToCart,
       updateItemQuantity,
+      setPaymentMethod,
     ],
   )
 
